@@ -21,6 +21,21 @@ class BoardView: UIView {
         drawBoard()
     }
     
+    func drawPieces() {
+          for row in 0..<8 {
+              for col in 0..<8 {
+                  if let piece = chessDelegate?.pieceAt(col: col, row: row), piece != movingPiece {
+                      drawPieceAt(col: piece.col, row: piece.row, imageName: piece.imageName)
+                  }
+              }
+          }
+          
+          if let movingPiece = movingPiece {
+              let pieceImage = UIImage(named: movingPiece.imageName)
+              pieceImage?.draw(in: CGRect(x: fingerLocationX - cellSide/2, y: fingerLocationY - cellSide/2, width: cellSide, height: cellSide))
+          }
+      }
+    
     func drawBoard()  {
         
         

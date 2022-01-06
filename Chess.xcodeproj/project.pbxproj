@@ -16,6 +16,8 @@
 		1EBBAD5E2787A855000E7626 /* ChessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBBAD5D2787A855000E7626 /* ChessTests.swift */; };
 		1EBBAD692787A855000E7626 /* ChessUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBBAD682787A855000E7626 /* ChessUITests.swift */; };
 		1EBBAD7A2787A87D000E7626 /* BoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBBAD792787A87D000E7626 /* BoardView.swift */; };
+		1EBBAD852787B521000E7626 /* ChessPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBBAD842787B521000E7626 /* ChessPiece.swift */; };
+		1EBBAD8A2787B5C5000E7626 /* ChessEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBBAD892787B5C5000E7626 /* ChessEngine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,8 @@
 		1EBBAD682787A855000E7626 /* ChessUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessUITests.swift; sourceTree = "<group>"; };
 		1EBBAD6A2787A855000E7626 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1EBBAD792787A87D000E7626 /* BoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardView.swift; sourceTree = "<group>"; };
+		1EBBAD842787B521000E7626 /* ChessPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessPiece.swift; sourceTree = "<group>"; };
+		1EBBAD892787B5C5000E7626 /* ChessEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessEngine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,6 +113,8 @@
 				1EBBAD4F2787A855000E7626 /* Assets.xcassets */,
 				1EBBAD512787A855000E7626 /* LaunchScreen.storyboard */,
 				1EBBAD542787A855000E7626 /* Info.plist */,
+				1EBBAD842787B521000E7626 /* ChessPiece.swift */,
+				1EBBAD892787B5C5000E7626 /* ChessEngine.swift */,
 			);
 			path = Chess;
 			sourceTree = "<group>";
@@ -261,9 +267,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1EBBAD8A2787B5C5000E7626 /* ChessEngine.swift in Sources */,
 				1EBBAD4B2787A852000E7626 /* ViewController.swift in Sources */,
 				1EBBAD7A2787A87D000E7626 /* BoardView.swift in Sources */,
 				1EBBAD472787A852000E7626 /* AppDelegate.swift in Sources */,
+				1EBBAD852787B521000E7626 /* ChessPiece.swift in Sources */,
 				1EBBAD492787A852000E7626 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
