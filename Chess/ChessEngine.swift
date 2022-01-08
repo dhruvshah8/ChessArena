@@ -11,7 +11,8 @@ struct ChessEngine {
     var pieces = Set<ChessPiece>()
     
     mutating func movePiece(fromCol: Int, fromRow: Int, toCol: Int, toRow:Int) {
-        if fromCol == toCol && fromRow == toRow {
+   
+        if !canMovePiece(fromCol: fromCol, fromRow: fromRow, toCol: toCol, toRow: toRow) {
             return
         }
         
@@ -19,9 +20,26 @@ struct ChessEngine {
         guard let movingPiece = pieceAt(col: fromCol, row: fromRow) else {
             return
         }
+        
+        
+        if let target = pieceAt(col: toCol, row: toRow) {
+            if target.isWhite == movingPiece.isWhite {
+                return
+            }
+            pieces.remove(target  )
+        }
+        
         // remove piece and add the piece again at the new location
         pieces.remove(movingPiece)
         pieces.insert(ChessPiece(col: toCol, row: toRow, isWhite: movingPiece.isWhite, imageName: movingPiece.imageName))
+    }
+    
+    func canMovePiece(fromCol: Int, fromRow: Int, toCol: Int, toRow:Int) -> Bool{
+        if fromCol == toCol && fromRow == toRow {
+            return false
+        }
+   
+        return true
     }
     
     
