@@ -10,14 +10,14 @@ import UIKit
 class BoardView: UIView {
     
     // Global Variable to hold previous location of piece
-    var fromCol = 0 // Current Moving Piece
-    var fromRow = 0
+    var fromCol: Int? = nil // Current Moving Piece
+    var fromRow: Int? = nil
     var movingImage: UIImage? = nil // Dragable Piece
     var movingPieceX: CGFloat = 0
     var movingPieceY: CGFloat = 0
     
     
-    let ratio: CGFloat = 0.8
+    let ratio: CGFloat = 0.95
     var originX: CGFloat = 0
     var originY: CGFloat = 0
     var cellSide: CGFloat = 35
@@ -33,7 +33,6 @@ class BoardView: UIView {
         originY = bounds.height * (1-ratio)/2
         drawBoard()
         drawPieces()
-        dragPiece()
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -52,7 +51,7 @@ class BoardView: UIView {
         fromCol = Int((fingerLocation.x - originX) / cellSide)
         fromRow = Int((fingerLocation.y - originY) / cellSide)
         
-        if let movingPiece = chessDelegate?.pieceAt(col: fromCol, row: fromRow) {
+        if let fromCol = fromCol, let fromRow = fromRow, let movingPiece = chessDelegate?.pieceAt(col: fromCol, row: fromRow) {
             movingImage = UIImage(named: movingPiece.imageName)
         }
         
@@ -63,20 +62,26 @@ class BoardView: UIView {
         let fingerLocation = touch.location(in: self)
         let toCol = Int((fingerLocation.x - originX) / cellSide)
         let toRow = Int((fingerLocation.y - originY) / cellSide)
-        chessDelegate?.movePiece(fromCol: fromCol, fromRow: fromRow, toCol: toCol, toRow: toRow)
+        
+        if let fromCol = fromCol, let fromRow = fromRow, fromCol != toCol || fromRow != toRow {
+            chessDelegate?.movePiece(fromCol: fromCol, fromRow: fromRow, toCol: toCol, toRow: toRow)
+        }
+        
         movingImage = nil
+        fromCol = nil
+        fromRow = nil
+        setNeedsDisplay()
     }
     
-    func drawPieces() {
-        for piece in shawdowPiece {
+    func drawPieces() { // Hide Piece if its moving as it is already rendered
+        for piece in shawdowPiece where piece.col != fromCol || piece.row != fromRow {
             let pieceImage = UIImage(named: piece.imageName)
             pieceImage?.draw(in: CGRect(x: originX + CGFloat(piece.col) * cellSide, y: originY + CGFloat(piece.row) * cellSide, width: cellSide, height: cellSide))
         }
+        movingImage?.draw(in: CGRect(x: movingPieceX - cellSide/2, y: movingPieceY - cellSide/2, width: cellSide, height: cellSide))
       }
     
-    func dragPiece() {
-        movingImage?.draw(in: CGRect(x: movingPieceX - cellSide/2, y: movingPieceY - cellSide/2, width: cellSide, height: cellSide))
-    }
+
     
     func drawBoard()  {
         for row in 0..<4 {
