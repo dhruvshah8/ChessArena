@@ -7,8 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class ViewController: UIViewController, ChessDelegate{
     
     // Model:
     var chessEngine: ChessEngine = ChessEngine()
@@ -23,6 +22,11 @@ class ViewController: UIViewController {
         boardView.shawdowPiece = chessEngine.pieces
     }
 
-
+    
+    // Whatever data we get from View, we pass -> Engine
+    func movePiece(fromCol: Int, fromRow: Int, toCol: Int, toRow: Int) {
+        chessEngine.movePiece(fromCol: fromCol, fromRow: fromRow, toCol: toCol, toRow: toRow)
+    }
+    
 }
 

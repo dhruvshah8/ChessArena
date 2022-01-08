@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1EB329B627894CD400C927B2 /* ChessDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EB329B527894CD400C927B2 /* ChessDelegate.swift */; };
 		1EBBAD472787A852000E7626 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBBAD462787A852000E7626 /* AppDelegate.swift */; };
 		1EBBAD492787A852000E7626 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBBAD482787A852000E7626 /* SceneDelegate.swift */; };
 		1EBBAD4B2787A852000E7626 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EBBAD4A2787A852000E7626 /* ViewController.swift */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1EB329B527894CD400C927B2 /* ChessDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessDelegate.swift; sourceTree = "<group>"; };
 		1EBBAD432787A852000E7626 /* Chess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chess.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1EBBAD462787A852000E7626 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1EBBAD482787A852000E7626 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				1EBBAD542787A855000E7626 /* Info.plist */,
 				1EBBAD842787B521000E7626 /* ChessPiece.swift */,
 				1EBBAD892787B5C5000E7626 /* ChessEngine.swift */,
+				1EB329B527894CD400C927B2 /* ChessDelegate.swift */,
 			);
 			path = Chess;
 			sourceTree = "<group>";
@@ -269,6 +272,7 @@
 			files = (
 				1EBBAD8A2787B5C5000E7626 /* ChessEngine.swift in Sources */,
 				1EBBAD4B2787A852000E7626 /* ViewController.swift in Sources */,
+				1EB329B627894CD400C927B2 /* ChessDelegate.swift in Sources */,
 				1EBBAD7A2787A87D000E7626 /* BoardView.swift in Sources */,
 				1EBBAD472787A852000E7626 /* AppDelegate.swift in Sources */,
 				1EBBAD852787B521000E7626 /* ChessPiece.swift in Sources */,
