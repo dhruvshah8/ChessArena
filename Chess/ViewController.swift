@@ -14,6 +14,7 @@ class ViewController: UIViewController{
     
     // View:
     @IBOutlet weak var boardView: BoardView!
+    @IBOutlet weak var infoLabel: UILabel!
     
     
     override func viewDidLoad() {
@@ -26,6 +27,11 @@ class ViewController: UIViewController{
         boardView.setNeedsDisplay()
     }
 
+    @IBAction func reset(_ sender: Any) {
+        chessEngine.initializeGame()
+        boardView.shawdowPiece = chessEngine.pieces
+        boardView.setNeedsDisplay()
+    }
     
     
     

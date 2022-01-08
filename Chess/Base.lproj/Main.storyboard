@@ -23,17 +23,38 @@
                                     <constraint firstAttribute="width" secondItem="qFL-xh-eIm" secondAttribute="height" multiplier="1:1" id="Ho1-n8-Fjo"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="White's Turn" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YnD-p7-Ts6">
+                                <rect key="frame" x="20" y="798" width="770" height="29"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cm5-uR-45g">
+                                <rect key="frame" x="20" y="847" width="770" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                <state key="normal" title="Reset Game"/>
+                                <connections>
+                                    <action selector="reset:" destination="BYZ-38-t0r" eventType="touchUpInside" id="akp-Wk-8Ci"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="YnD-p7-Ts6" firstAttribute="top" secondItem="qFL-xh-eIm" secondAttribute="bottom" constant="8" id="5zU-HN-YOM"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YnD-p7-Ts6" secondAttribute="trailing" constant="20" id="7LX-2O-RsF"/>
                             <constraint firstItem="qFL-xh-eIm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Amh-K7-HpN"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cm5-uR-45g" secondAttribute="trailing" constant="20" id="BUM-3J-tS8"/>
+                            <constraint firstItem="cm5-uR-45g" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Kb4-vb-baW"/>
                             <constraint firstItem="qFL-xh-eIm" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="M2n-Gb-1a6"/>
+                            <constraint firstItem="cm5-uR-45g" firstAttribute="top" secondItem="YnD-p7-Ts6" secondAttribute="bottom" constant="20" id="Trg-Iw-DnB"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qFL-xh-eIm" secondAttribute="trailing" constant="20" id="avd-62-9ht"/>
+                            <constraint firstItem="YnD-p7-Ts6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="dPD-a7-NXz"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="boardView" destination="qFL-xh-eIm" id="Tbg-Q9-LN1"/>
+                        <outlet property="infoLabel" destination="YnD-p7-Ts6" id="8TK-2o-OrN"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -26,7 +26,7 @@ struct ChessEngine {
             if target.isWhite == movingPiece.isWhite {
                 return
             }
-            pieces.remove(target  )
+            pieces.remove(target)
         }
         
         // remove piece and add the piece again at the new location
