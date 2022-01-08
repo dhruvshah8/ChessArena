@@ -9,12 +9,19 @@ import UIKit
 
 class BoardView: UIView {
     
+    // Global Variable to hold previous location of piece
+    var fromCol = 0
+    var fromRow = 0
+    
     let ratio: CGFloat = 0.8
     var originX: CGFloat = 0
     var originY: CGFloat = 0
     var cellSide: CGFloat = 35
     
+
+    
     var shawdowPiece: Set<ChessPiece> = Set<ChessPiece>()
+    var chessDelegate: ChessDelegate? = nil
 
     override func draw(_ rect: CGRect) {
         cellSide = bounds.width * ratio / 8
@@ -25,11 +32,19 @@ class BoardView: UIView {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-//        let first = touches.first! // one touch is always going to be in set thus ! is safe
-//        let fingerLocation = first.location(in: self)
         
-        
-        
+        let touch = touches.first! // one touch is always going to be in set thus ! is safe
+        let fingerLocation = touch.location(in: self)
+        fromCol = Int((fingerLocation.x - originX) / cellSide)
+        fromRow = Int((fingerLocation.y - originY) / cellSide)
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first!
+        let fingerLocation = touch.location(in: self)
+        let toCol = Int((fingerLocation.x - originX) / cellSide)
+        let toRow = Int((fingerLocation.y - originY) / cellSide)
+        chessDelegate?.movePiece(fromCol: fromCol, fromRow: fromRow, toCol: toCol, toRow: toRow)
     }
     
     func drawPieces() {
