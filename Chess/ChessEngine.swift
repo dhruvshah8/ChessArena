@@ -9,6 +9,7 @@ import Foundation
 
 struct ChessEngine {
     var pieces = Set<ChessPiece>()
+    var whitesTurn: Bool = true // Who's Turn Var
     
     mutating func movePiece(fromCol: Int, fromRow: Int, toCol: Int, toRow:Int) {
    
@@ -32,11 +33,22 @@ struct ChessEngine {
         // remove piece and add the piece again at the new location
         pieces.remove(movingPiece)
         pieces.insert(ChessPiece(col: toCol, row: toRow, isWhite: movingPiece.isWhite, imageName: movingPiece.imageName))
+        
+        whitesTurn = !whitesTurn // Change Turn 
+        
     }
     
     func canMovePiece(fromCol: Int, fromRow: Int, toCol: Int, toRow:Int) -> Bool{
         if fromCol == toCol && fromRow == toRow {
             return false
+        }
+        
+        guard let movingPiece = pieceAt(col: fromCol, row: fromRow) else {
+            return false
+        }
+        
+        if movingPiece.isWhite != whitesTurn {
+            return false // wrong player's turn
         }
    
         return true
@@ -54,6 +66,7 @@ struct ChessEngine {
     }
     
     mutating func initializeGame() {
+        whitesTurn = true 
         pieces.removeAll()
         
         // MARK: Optimized using loop:
