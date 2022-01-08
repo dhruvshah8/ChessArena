@@ -10,5 +10,6 @@ import Foundation
 // Protocal:
 // Essentially a contract to provice a service
 protocol ChessDelegate {
-  func movePiece(fromCol: Int, fromRow: Int, toCol: Int, toRow: Int)
+    func movePiece(fromCol: Int, fromRow: Int, toCol: Int, toRow: Int)
+    func PieceAt(col: Int, row: Int) -> ChessPiece?
 }
