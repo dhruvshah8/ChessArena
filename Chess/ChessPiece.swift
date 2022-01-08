@@ -10,6 +10,7 @@ import Foundation
 struct ChessPiece: Hashable {
     let col: Int
     let row: Int
+    let isWhite: Bool // true: white, false: black
 //    let player: ChessPlayer
     let imageName: String
 }

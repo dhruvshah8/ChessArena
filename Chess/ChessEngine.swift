@@ -21,7 +21,7 @@ struct ChessEngine {
         }
         // remove piece and add the piece again at the new location
         pieces.remove(movingPiece)
-        pieces.insert(ChessPiece(col: toCol, row: toRow, imageName: movingPiece.imageName))
+        pieces.insert(ChessPiece(col: toCol, row: toRow, isWhite: movingPiece.isWhite, imageName: movingPiece.imageName))
     }
     
     
@@ -42,26 +42,26 @@ struct ChessEngine {
         
         // Minor Pieces:
         for i in 0..<2 {
-            pieces.insert(ChessPiece(col: (i * 7), row: 0, imageName: "Rook-black"))
-            pieces.insert(ChessPiece(col: (i * 7), row: 7, imageName: "Rook-white"))
-            pieces.insert(ChessPiece(col: 1 + (i * 5), row: 0, imageName: "Knight-black"))
-            pieces.insert(ChessPiece(col: 1 + (i * 5), row: 7, imageName: "Knight-white"))
-            pieces.insert(ChessPiece(col: 2 + (i * 3), row: 0, imageName: "Bishop-black"))
-            pieces.insert(ChessPiece(col: 2 + (i * 3), row: 7, imageName: "Bishop-white"))
+            pieces.insert(ChessPiece(col: (i * 7), row: 0, isWhite: false, imageName: "Rook-black"))
+            pieces.insert(ChessPiece(col: (i * 7), row: 7, isWhite: true, imageName: "Rook-white"))
+            pieces.insert(ChessPiece(col: 1 + (i * 5), row: 0, isWhite: false, imageName: "Knight-black"))
+            pieces.insert(ChessPiece(col: 1 + (i * 5), row: 7, isWhite: true, imageName: "Knight-white"))
+            pieces.insert(ChessPiece(col: 2 + (i * 3), row: 0, isWhite: false, imageName: "Bishop-black"))
+            pieces.insert(ChessPiece(col: 2 + (i * 3), row: 7, isWhite: true, imageName: "Bishop-white"))
         }
         
         // Pawns:
         for col in 0..<8 {
-            pieces.insert(ChessPiece(col: col, row: 1, imageName: "Pawn-black"))
-            pieces.insert(ChessPiece(col: col, row: 6, imageName: "Pawn-white"))
+            pieces.insert(ChessPiece(col: col, row: 1, isWhite: false, imageName: "Pawn-black"))
+            pieces.insert(ChessPiece(col: col, row: 6, isWhite: true, imageName: "Pawn-white"))
         }
         
         // King & Queen:
-        pieces.insert(ChessPiece(col: 3, row: 0, imageName: "Queen-black"))
-        pieces.insert(ChessPiece(col: 3, row: 7, imageName: "Queen-white"))
+        pieces.insert(ChessPiece(col: 3, row: 0, isWhite: false, imageName: "Queen-black"))
+        pieces.insert(ChessPiece(col: 3, row: 7, isWhite: true, imageName: "Queen-white"))
         
-        pieces.insert(ChessPiece(col: 4, row: 0, imageName: "King-black"))
-        pieces.insert(ChessPiece(col: 4, row: 7, imageName: "King-white"))
+        pieces.insert(ChessPiece(col: 4, row: 0, isWhite: false, imageName: "King-black"))
+        pieces.insert(ChessPiece(col: 4, row: 7, isWhite: true, imageName: "King-white"))
         
         
     }
