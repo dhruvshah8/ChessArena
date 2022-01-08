@@ -24,6 +24,14 @@ class BoardView: UIView {
         drawPieces()
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        let first = touches.first! // one touch is always going to be in set thus ! is safe
+//        let fingerLocation = first.location(in: self)
+        
+        
+        
+    }
+    
     func drawPieces() {
         for piece in shawdowPiece {
             let pieceImage = UIImage(named: piece.imageName)
@@ -32,8 +40,6 @@ class BoardView: UIView {
       }
     
     func drawBoard()  {
-        
-        
         for row in 0..<4 {
             for col in 0..<4 {
                 drawSquare(col: col*2, row: row * 2, color: UIColor.white)
