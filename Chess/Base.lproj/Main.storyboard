@@ -32,6 +32,9 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qFL-xh-eIm" secondAttribute="trailing" constant="20" id="avd-62-9ht"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="boardView" destination="qFL-xh-eIm" id="Tbg-Q9-LN1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

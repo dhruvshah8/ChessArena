@@ -13,27 +13,22 @@ class BoardView: UIView {
     var originX: CGFloat = 0
     var originY: CGFloat = 0
     var cellSide: CGFloat = 35
+    
+    var shawdowPiece: Set<ChessPiece> = Set<ChessPiece>()
 
     override func draw(_ rect: CGRect) {
         cellSide = bounds.width * ratio / 8
         originX = bounds.width * (1-ratio)/2
         originY = bounds.height * (1-ratio)/2
         drawBoard()
+        drawPieces()
     }
     
     func drawPieces() {
-          for row in 0..<8 {
-              for col in 0..<8 {
-                  if let piece = chessDelegate?.pieceAt(col: col, row: row), piece != movingPiece {
-                      drawPieceAt(col: piece.col, row: piece.row, imageName: piece.imageName)
-                  }
-              }
-          }
-          
-          if let movingPiece = movingPiece {
-              let pieceImage = UIImage(named: movingPiece.imageName)
-              pieceImage?.draw(in: CGRect(x: fingerLocationX - cellSide/2, y: fingerLocationY - cellSide/2, width: cellSide, height: cellSide))
-          }
+        for piece in shawdowPiece {
+            let pieceImage = UIImage(named: piece.imageName)
+            pieceImage?.draw(in: CGRect(x: originX + CGFloat(piece.col) * cellSide, y: originY + CGFloat(piece.row) * cellSide, width: cellSide, height: cellSide))
+        }
       }
     
     func drawBoard()  {
