@@ -40,7 +40,7 @@ extension ViewController: ChessDelegate {
         boardView.setNeedsDisplay()
     }
     
-    func PieceAt(col: Int, row: Int) -> ChessPiece? {
+    func pieceAt(col: Int, row: Int) -> ChessPiece? {
         return chessEngine.pieceAt(col: col, row: row)
     }
 }

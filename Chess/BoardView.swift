@@ -10,8 +10,12 @@ import UIKit
 class BoardView: UIView {
     
     // Global Variable to hold previous location of piece
-    var fromCol = 0
+    var fromCol = 0 // Current Moving Piece
     var fromRow = 0
+    var movingImage: UIImage? = nil // Dragable Piece
+    var movingPieceX: CGFloat = 0
+    var movingPieceY: CGFloat = 0
+    
     
     let ratio: CGFloat = 0.8
     var originX: CGFloat = 0
@@ -29,7 +33,17 @@ class BoardView: UIView {
         originY = bounds.height * (1-ratio)/2
         drawBoard()
         drawPieces()
+        dragPiece()
     }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = touches.first!
+        let fingerLocation = touch.location(in: self)
+        movingPieceX = fingerLocation.x
+        movingPieceY = fingerLocation.y
+        setNeedsDisplay() // trigger drawing draw(_ rect:CGRect)
+    }
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
@@ -37,6 +51,11 @@ class BoardView: UIView {
         let fingerLocation = touch.location(in: self)
         fromCol = Int((fingerLocation.x - originX) / cellSide)
         fromRow = Int((fingerLocation.y - originY) / cellSide)
+        
+        if let movingPiece = chessDelegate?.pieceAt(col: fromCol, row: fromRow) {
+            movingImage = UIImage(named: movingPiece.imageName)
+        }
+        
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -45,6 +64,7 @@ class BoardView: UIView {
         let toCol = Int((fingerLocation.x - originX) / cellSide)
         let toRow = Int((fingerLocation.y - originY) / cellSide)
         chessDelegate?.movePiece(fromCol: fromCol, fromRow: fromRow, toCol: toCol, toRow: toRow)
+        movingImage = nil
     }
     
     func drawPieces() {
@@ -53,6 +73,10 @@ class BoardView: UIView {
             pieceImage?.draw(in: CGRect(x: originX + CGFloat(piece.col) * cellSide, y: originY + CGFloat(piece.row) * cellSide, width: cellSide, height: cellSide))
         }
       }
+    
+    func dragPiece() {
+        movingImage?.draw(in: CGRect(x: movingPieceX - cellSide/2, y: movingPieceY - cellSide/2, width: cellSide, height: cellSide))
+    }
     
     func drawBoard()  {
         for row in 0..<4 {
