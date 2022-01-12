@@ -6,8 +6,10 @@ A MultiPeer Connectivity Chess Game allowing two users on differet devices to co
 <br> </br>
 
 <img src="/chessArena.png" align="right" width="400" hspace="10" vspace="10">
+
 <br> </br>
 <br> </br>
+
 ## Features
 
 - [x] Multipeer Connectivity through Bluetooth Sessions
