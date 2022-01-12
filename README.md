@@ -15,4 +15,4 @@ A MultiPeer Connectivity Chess Game allowing two users on differet devices to co
 ## Requirements
 
 - iOS 13.0+
-- Xcode 9.3
+- Xcode 11
