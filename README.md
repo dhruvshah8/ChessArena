@@ -5,7 +5,7 @@
 A MultiPeer Connectivity Chess Game allowing two users on differet devices to connect together on the same chess board and play. 
 <br /><br /><br /><br /><br /><br /><br />
 
-<img src="/chessArena.png" align="center" width="400" hspace="10" vspace="10">
+<img src="/chessArena.png" align="right" width="400" hspace="10" vspace="10">
 
 ## Features
 
