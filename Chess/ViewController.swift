@@ -16,6 +16,8 @@ class ViewController: UIViewController{
     // View:
     @IBOutlet weak var boardView: BoardView!
     @IBOutlet weak var infoLabel: UILabel!
+    @IBOutlet weak var createButton: UIButton!
+    @IBOutlet weak var joinButton: UIButton!
     
     
     // MultiPeerConnectivity Variables:
@@ -27,6 +29,13 @@ class ViewController: UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // View Elements:
+        createButton.layer.cornerRadius = 10
+        joinButton.layer.cornerRadius = 10
+        createButton.contentEdgeInsets = UIEdgeInsets(top: 10,left: 10,bottom: 10,right: 10)
+        joinButton.contentEdgeInsets = UIEdgeInsets(top: 10,left: 10,bottom: 10,right: 10)
+        
         // Intialize Multipeer Connectivity Variables:
         peerID = MCPeerID(displayName: UIDevice.current.name)
         session = MCSession(peer: peerID, securityIdentity: nil, encryptionPreference: .required)
@@ -97,6 +106,21 @@ extension ViewController: MCSessionDelegate {
     
     func session(_ session: MCSession, didReceive data: Data, fromPeer peerID: MCPeerID) {
         print("recieved data: \(data)")
+        if let move = String(data: data, encoding: .utf8) {
+            let moveArray = move.components(separatedBy: ":")
+        
+            
+            if let fromCol = Int(moveArray[0]), let fromRow = Int(moveArray[1]), let toCol = Int(moveArray[2]), let toRow = Int(moveArray[3]) {
+                DispatchQueue.main.async {
+                    self.updateMove(fromCol: fromCol, fromRow: fromRow, toCol: toCol, toRow: toRow)
+                }
+                
+            }
+            
+//            print(" HERE: ")
+//            print(moveArray)
+
+        }
     }
     
     func session(_ session: MCSession, didReceive stream: InputStream, withName streamName: String, fromPeer peerID: MCPeerID) {
@@ -116,6 +140,16 @@ extension ViewController: MCSessionDelegate {
 extension ViewController: ChessDelegate {
     // Whatever data we get from View, we pass -> Engine
     func movePiece(fromCol: Int, fromRow: Int, toCol: Int, toRow: Int) {
+        
+        updateMove(fromCol: fromCol, fromRow: fromRow, toCol: toCol, toRow: toRow)
+        let move: String = "\(fromCol):\(fromRow):\(toCol):\(toRow)"
+        // Encode String as UTF8 Data and send data to peers
+        if let data = move.data(using: .utf8) {
+            try? session.send(data, toPeers: session.connectedPeers, with: .reliable)
+        }
+    }
+    
+    func updateMove(fromCol: Int, fromRow: Int, toCol: Int, toRow: Int) {
         chessEngine.movePiece(fromCol: fromCol, fromRow: fromRow, toCol: toCol, toRow: toRow)
         boardView.shawdowPiece = chessEngine.pieces
         boardView.setNeedsDisplay()
@@ -125,11 +159,9 @@ extension ViewController: ChessDelegate {
         } else {
             infoLabel.text = "Blacks Turn"
         }
-        
     }
     
     func pieceAt(col: Int, row: Int) -> ChessPiece? {
         return chessEngine.pieceAt(col: col, row: row)
     }
 }
-

@@ -17,76 +17,94 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qFL-xh-eIm" customClass="BoardView" customModule="Chess" customModuleProvider="target">
-                                <rect key="frame" x="20" y="64" width="374" height="374"/>
-                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                <rect key="frame" x="20" y="151" width="374" height="374"/>
+                                <color key="backgroundColor" systemColor="systemGrayColor"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="qFL-xh-eIm" secondAttribute="height" multiplier="1:1" id="Ho1-n8-Fjo"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="White's Turn" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YnD-p7-Ts6">
-                                <rect key="frame" x="20" y="446" width="374" height="29"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <nil key="textColor"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Turn" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YnD-p7-Ts6">
+                                <rect key="frame" x="30" y="535" width="85" height="23"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                <color key="textColor" systemColor="systemBackgroundColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cm5-uR-45g">
-                                <rect key="frame" x="20" y="495" width="374" height="41"/>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ckC-6Y-ENF">
+                                <rect key="frame" x="20" y="766" width="156" height="56"/>
+                                <color key="backgroundColor" red="0.39124523071181161" green="0.47648854856870093" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="Reset Game"/>
-                                <connections>
-                                    <action selector="reset:" destination="BYZ-38-t0r" eventType="touchUpInside" id="akp-Wk-8Ci"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ckC-6Y-ENF">
-                                <rect key="frame" x="20" y="556" width="374" height="41"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="Advertise"/>
+                                <size key="titleShadowOffset" width="2" height="0.0"/>
+                                <state key="normal" title="Create Arena">
+                                    <color key="titleColor" systemColor="systemBackgroundColor"/>
+                                </state>
                                 <connections>
                                     <action selector="advertise:" destination="BYZ-38-t0r" eventType="touchUpInside" id="g0g-Vg-Xtg"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ah6-tA-ejb">
-                                <rect key="frame" x="20" y="617" width="374" height="41"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ah6-tA-ejb">
+                                <rect key="frame" x="259" y="766" width="135" height="56"/>
+                                <color key="backgroundColor" red="0.3912452307" green="0.47648854860000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="Join"/>
+                                <state key="normal" title="Join Arena">
+                                    <color key="titleColor" systemColor="systemBackgroundColor"/>
+                                </state>
                                 <connections>
                                     <action selector="join:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7wa-5j-1eU"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chess Arena " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Ot-1y-iL3">
+                                <rect key="frame" x="58" y="64" width="298" height="57"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="47"/>
+                                <color key="textColor" systemColor="systemBackgroundColor"/>
+                                <color key="highlightedColor" systemColor="systemBackgroundColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cm5-uR-45g">
+                                <rect key="frame" x="267" y="544" width="127" height="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Reset Game">
+                                    <color key="titleColor" systemColor="systemBackgroundColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="reset:" destination="BYZ-38-t0r" eventType="touchUpInside" id="akp-Wk-8Ci"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemOrangeColor"/>
                         <constraints>
-                            <constraint firstItem="YnD-p7-Ts6" firstAttribute="top" secondItem="qFL-xh-eIm" secondAttribute="bottom" constant="8" id="5zU-HN-YOM"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YnD-p7-Ts6" secondAttribute="trailing" constant="20" id="7LX-2O-RsF"/>
-                            <constraint firstItem="qFL-xh-eIm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Amh-K7-HpN"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cm5-uR-45g" secondAttribute="trailing" constant="20" id="BUM-3J-tS8"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ah6-tA-ejb" secondAttribute="trailing" constant="20" id="Cjs-Py-v2B"/>
-                            <constraint firstItem="ckC-6Y-ENF" firstAttribute="top" secondItem="cm5-uR-45g" secondAttribute="bottom" constant="20" id="DBY-EP-EJp"/>
-                            <constraint firstItem="Ah6-tA-ejb" firstAttribute="top" secondItem="ckC-6Y-ENF" secondAttribute="bottom" constant="20" id="Ej8-2c-jiO"/>
-                            <constraint firstItem="cm5-uR-45g" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="Kb4-vb-baW"/>
-                            <constraint firstItem="Ah6-tA-ejb" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="LkV-U0-852"/>
-                            <constraint firstItem="qFL-xh-eIm" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="M2n-Gb-1a6"/>
-                            <constraint firstItem="cm5-uR-45g" firstAttribute="top" secondItem="YnD-p7-Ts6" secondAttribute="bottom" constant="20" id="Trg-Iw-DnB"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qFL-xh-eIm" secondAttribute="trailing" constant="20" id="avd-62-9ht"/>
-                            <constraint firstItem="YnD-p7-Ts6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="dPD-a7-NXz"/>
-                            <constraint firstItem="ckC-6Y-ENF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="dge-EW-4yT"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ckC-6Y-ENF" secondAttribute="trailing" constant="20" id="kET-Ma-Ney"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qFL-xh-eIm" secondAttribute="trailing" constant="20" id="1Vh-rj-mWU"/>
+                            <constraint firstItem="3Ot-1y-iL3" firstAttribute="centerX" secondItem="qFL-xh-eIm" secondAttribute="centerX" id="2lB-IV-d5y"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="ckC-6Y-ENF" secondAttribute="bottom" constant="40" id="5sA-eF-qvB"/>
+                            <constraint firstItem="YnD-p7-Ts6" firstAttribute="top" secondItem="qFL-xh-eIm" secondAttribute="bottom" constant="10" id="FdK-nq-Uj6"/>
+                            <constraint firstItem="qFL-xh-eIm" firstAttribute="top" secondItem="3Ot-1y-iL3" secondAttribute="bottom" constant="30" id="Y6v-dL-ycA"/>
+                            <constraint firstItem="cm5-uR-45g" firstAttribute="top" secondItem="qFL-xh-eIm" secondAttribute="bottom" constant="10" id="ZTB-eb-wnC"/>
+                            <constraint firstItem="3Ot-1y-iL3" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="b4K-kE-6Q0"/>
+                            <constraint firstItem="qFL-xh-eIm" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="eB9-Ej-062"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cm5-uR-45g" secondAttribute="trailing" constant="20" id="llw-Fb-P9K"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Ah6-tA-ejb" secondAttribute="bottom" constant="40" id="tNw-AB-Bb2"/>
+                            <constraint firstItem="ckC-6Y-ENF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="xLy-x7-za2"/>
+                            <constraint firstItem="YnD-p7-Ts6" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="xUq-iS-riN"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Ah6-tA-ejb" secondAttribute="trailing" constant="20" id="xi6-OV-2wV"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="boardView" destination="qFL-xh-eIm" id="Tbg-Q9-LN1"/>
+                        <outlet property="createButton" destination="ckC-6Y-ENF" id="11G-1O-dZm"/>
                         <outlet property="infoLabel" destination="YnD-p7-Ts6" id="8TK-2o-OrN"/>
+                        <outlet property="joinButton" destination="Ah6-tA-ejb" id="dDB-3S-b5K"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-204.44444444444443" y="78.888888888888886"/>
+            <point key="canvasLocation" x="-205.79710144927537" y="78.348214285714278"/>
         </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
             <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
