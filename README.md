@@ -7,11 +7,10 @@ A MultiPeer Connectivity Chess Game allowing two users on differet devices to co
 
 ## Features
 
-- [x] Feature 1
-- [x] Feature 2
-- [x] Feature 3
-- [x] Feature 4
-- [x] Feature 5
+- [x] Multipeer Connectivity through Bluetooth Sessions
+- [x] MVC Design Pattern
+- [x] Delegete-Protocal Communication 
+- [x] Unit Testings for legal moves
 
 ## Requirements
 
