@@ -16,6 +16,9 @@ class BoardView: UIView {
     var movingPieceX: CGFloat = 0
     var movingPieceY: CGFloat = 0
     
+    // To change layout -> Put Black player on top or bottom
+    var blackOnTop = true
+    
     
     let ratio: CGFloat = 0.95
     var originX: CGFloat = 0
@@ -48,8 +51,8 @@ class BoardView: UIView {
         
         let touch = touches.first! // one touch is always going to be in set thus ! is safe
         let fingerLocation = touch.location(in: self)
-        fromCol = Int((fingerLocation.x - originX) / cellSide)
-        fromRow = Int((fingerLocation.y - originY) / cellSide)
+        fromCol = flipBoard(Int((fingerLocation.x - originX) / cellSide))
+        fromRow = flipBoard(Int((fingerLocation.y - originY) / cellSide))
         
         if let fromCol = fromCol, let fromRow = fromRow, let movingPiece = chessDelegate?.pieceAt(col: fromCol, row: fromRow) {
             movingImage = UIImage(named: movingPiece.imageName)
@@ -60,8 +63,8 @@ class BoardView: UIView {
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = touches.first!
         let fingerLocation = touch.location(in: self)
-        let toCol = Int((fingerLocation.x - originX) / cellSide)
-        let toRow = Int((fingerLocation.y - originY) / cellSide)
+        let toCol = flipBoard(Int((fingerLocation.x - originX) / cellSide))
+        let toRow = flipBoard(Int((fingerLocation.y - originY) / cellSide))
         
         if let fromCol = fromCol, let fromRow = fromRow, fromCol != toCol || fromRow != toRow {
             chessDelegate?.movePiece(fromCol: fromCol, fromRow: fromRow, toCol: toCol, toRow: toRow)
@@ -76,7 +79,8 @@ class BoardView: UIView {
     func drawPieces() { // Hide Piece if its moving as it is already rendered
         for piece in shawdowPiece where piece.col != fromCol || piece.row != fromRow {
             let pieceImage = UIImage(named: piece.imageName)
-            pieceImage?.draw(in: CGRect(x: originX + CGFloat(piece.col) * cellSide, y: originY + CGFloat(piece.row) * cellSide, width: cellSide, height: cellSide))
+            
+            pieceImage?.draw(in: CGRect(x: originX + CGFloat(flipBoard(piece.col)) * cellSide, y: originY + CGFloat(flipBoard(piece.row)) * cellSide, width: cellSide, height: cellSide))
         }
         movingImage?.draw(in: CGRect(x: movingPieceX - cellSide/2, y: movingPieceY - cellSide/2, width: cellSide, height: cellSide))
       }
@@ -98,6 +102,12 @@ class BoardView: UIView {
         let path = UIBezierPath(rect: CGRect(x: originX + CGFloat(col) * cellSide, y: originY + CGFloat(row) * cellSide, width: cellSide, height: cellSide))
         color.setFill()
         path.fill()
+    }
+    
+    
+    // If Black on Top then essentially flip all the pieces on board
+    func flipBoard(_ coordinate: Int) -> Int {
+        return blackOnTop ? coordinate : 7 - coordinate
     }
 
 

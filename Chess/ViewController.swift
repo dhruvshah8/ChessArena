@@ -54,6 +54,10 @@ class ViewController: UIViewController{
         nearbyServiceAdvertiser = MCNearbyServiceAdvertiser(peer: peerID, discoveryInfo: nil, serviceType: "Chess")
         nearbyServiceAdvertiser.delegate = self
         nearbyServiceAdvertiser.startAdvertisingPeer()
+        
+        // Make player Black
+        boardView.blackOnTop = false
+        boardView.setNeedsDisplay() // Redraw
     }
     
     // Connect to Advertised Signal & Join
@@ -61,13 +65,21 @@ class ViewController: UIViewController{
         let browser = MCBrowserViewController(serviceType: "Chess", session: session)
         browser.delegate = self
         present(browser, animated: true)
+        
+        // Make Player White
+        boardView.blackOnTop = true
+        boardView.setNeedsDisplay()
     }
     
     @IBAction func reset(_ sender: Any) {
         chessEngine.initializeGame()
         boardView.shawdowPiece = chessEngine.pieces
+        // Make Player White
+        boardView.blackOnTop = true
         boardView.setNeedsDisplay()
         infoLabel.text = "White's Turn"
+        
+
     }
 }
 
