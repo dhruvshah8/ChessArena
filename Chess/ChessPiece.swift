@@ -13,4 +13,5 @@ struct ChessPiece: Hashable {
     let isWhite: Bool // true: white, false: black
 //    let player: ChessPlayer
     let imageName: String
+    let rank: ChessRank
 }

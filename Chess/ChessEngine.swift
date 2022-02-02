@@ -32,7 +32,7 @@ struct ChessEngine {
         
         // remove piece and add the piece again at the new location
         pieces.remove(movingPiece)
-        pieces.insert(ChessPiece(col: toCol, row: toRow, isWhite: movingPiece.isWhite, imageName: movingPiece.imageName))
+        pieces.insert(ChessPiece(col: toCol, row: toRow, isWhite: movingPiece.isWhite, imageName: movingPiece.imageName, rank: movingPiece.rank))
         
         whitesTurn = !whitesTurn // Change Turn 
         
@@ -73,26 +73,26 @@ struct ChessEngine {
         
         // Minor Pieces:
         for i in 0..<2 {
-            pieces.insert(ChessPiece(col: (i * 7), row: 0, isWhite: false, imageName: "Rook-black"))
-            pieces.insert(ChessPiece(col: (i * 7), row: 7, isWhite: true, imageName: "Rook-white"))
-            pieces.insert(ChessPiece(col: 1 + (i * 5), row: 0, isWhite: false, imageName: "Knight-black"))
-            pieces.insert(ChessPiece(col: 1 + (i * 5), row: 7, isWhite: true, imageName: "Knight-white"))
-            pieces.insert(ChessPiece(col: 2 + (i * 3), row: 0, isWhite: false, imageName: "Bishop-black"))
-            pieces.insert(ChessPiece(col: 2 + (i * 3), row: 7, isWhite: true, imageName: "Bishop-white"))
+            pieces.insert(ChessPiece(col: (i * 7), row: 0, isWhite: false, imageName: "Rook-black", rank: .rook))
+            pieces.insert(ChessPiece(col: (i * 7), row: 7, isWhite: true, imageName: "Rook-white", rank: .rook))
+            pieces.insert(ChessPiece(col: 1 + (i * 5), row: 0, isWhite: false, imageName: "Knight-black", rank: .knight))
+            pieces.insert(ChessPiece(col: 1 + (i * 5), row: 7, isWhite: true, imageName: "Knight-white", rank: .knight))
+            pieces.insert(ChessPiece(col: 2 + (i * 3), row: 0, isWhite: false, imageName: "Bishop-black", rank: .bishop))
+            pieces.insert(ChessPiece(col: 2 + (i * 3), row: 7, isWhite: true, imageName: "Bishop-white", rank: .bishop))
         }
         
         // Pawns:
         for col in 0..<8 {
-            pieces.insert(ChessPiece(col: col, row: 1, isWhite: false, imageName: "Pawn-black"))
-            pieces.insert(ChessPiece(col: col, row: 6, isWhite: true, imageName: "Pawn-white"))
+            pieces.insert(ChessPiece(col: col, row: 1, isWhite: false, imageName: "Pawn-black", rank: .pawn))
+            pieces.insert(ChessPiece(col: col, row: 6, isWhite: true, imageName: "Pawn-white", rank: .pawn))
         }
         
         // King & Queen:
-        pieces.insert(ChessPiece(col: 3, row: 0, isWhite: false, imageName: "Queen-black"))
-        pieces.insert(ChessPiece(col: 3, row: 7, isWhite: true, imageName: "Queen-white"))
+        pieces.insert(ChessPiece(col: 3, row: 0, isWhite: false, imageName: "Queen-black", rank: .queen))
+        pieces.insert(ChessPiece(col: 3, row: 7, isWhite: true, imageName: "Queen-white", rank: .queen))
         
-        pieces.insert(ChessPiece(col: 4, row: 0, isWhite: false, imageName: "King-black"))
-        pieces.insert(ChessPiece(col: 4, row: 7, isWhite: true, imageName: "King-white"))
+        pieces.insert(ChessPiece(col: 4, row: 0, isWhite: false, imageName: "King-black", rank: .king))
+        pieces.insert(ChessPiece(col: 4, row: 7, isWhite: true, imageName: "King-white", rank: .king))
         
         
     }
@@ -107,7 +107,26 @@ extension ChessEngine: CustomStringConvertible {
         for row in 0..<8 {
             desc += "\(row)"
             for col in 0..<8 {
-                desc += " ."
+                if let piece = pieceAt(col: col, row: row) {
+                    switch piece.rank {
+                    case .king:
+                        desc += piece.isWhite ? " k" : " K"
+                    case .queen:
+                        desc += piece.isWhite ? " q" : " Q"
+                    case .bishop:
+                        desc += piece.isWhite ? " b" : " B"
+                    case .knight:
+                        desc += piece.isWhite ? " n" : " N"
+                    case .rook:
+                        desc += piece.isWhite ? " r" : " R"
+                    case .pawn:
+                        desc += piece.isWhite ? " p" : " P"
+                    }
+                } else {
+                    desc += " ."
+                }
+                
+           
             }
             desc += "\n"
         }
