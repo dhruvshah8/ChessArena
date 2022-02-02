@@ -52,6 +52,17 @@ class ChessEngineTests: XCTestCase {
         XCTAssertTrue(game.canMovePiece(fromCol: 0, fromRow: 7, toCol: 0, toRow: 5))
     }
     
+    func testBishopRules() {
+        var game = ChessEngine()
+        game.pieces.insert(ChessPiece(col: 2, row: 7, isWhite: true, imageName: "", rank: .bishop))
+        
+        XCTAssertFalse(game.canMovePiece(fromCol: 2, fromRow: 7, toCol: 3, toRow: 5))
+        game.pieces.insert(ChessPiece(col: 3, row: 6, isWhite: true, imageName: "", rank: .pawn))
+        XCTAssertFalse(game.canMovePiece(fromCol: 2, fromRow: 7, toCol: 4, toRow: 5))
+        XCTAssertFalse(game.canMovePiece(fromCol: 2, fromRow: 7, toCol: 7, toRow: 2))
+        
+        
+    }
 
     
 }
