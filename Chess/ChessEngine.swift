@@ -60,17 +60,73 @@ struct ChessEngine {
         switch movingPiece.rank {
         case .knight:
             return canMoveKnight(fromCol: fromCol, fromRow: fromRow, toCol: toCol, toRow: toRow)
+        case .rook:
+            return canMoveRook(fromCol: fromCol, fromRow: fromRow, toCol: toCol, toRow: toRow)
         default:
             return true
         }
-   
-//        return true
+
     }
     
     func canMoveKnight(fromCol: Int, fromRow: Int, toCol: Int, toRow:Int) -> Bool{
         
         return (abs(fromCol - toCol) == 1 && abs(fromRow - toRow) == 2) || (abs(fromRow - toRow) == 1 && abs(fromCol - toCol) == 2)
     
+    }
+    
+    func canMoveRook(fromCol: Int, fromRow: Int, toCol: Int, toRow:Int) -> Bool{
+        
+        guard isPathEmpty(fromCol: fromCol, fromRow: fromRow, toCol: toCol, toRow: toRow) else {
+            return false
+        }
+        return fromCol == toCol || fromRow == toRow
+    
+    }
+    
+    func isPathEmpty(fromCol: Int, fromRow: Int, toCol: Int, toRow:Int) -> Bool {
+        
+        // Check same row:
+        if fromRow == toRow {
+            
+            let minCol = min(fromCol, toCol)
+            let maxCol = max(fromCol, toCol)
+            
+            // One square away:
+            if (maxCol - minCol) < 2 {
+                return true
+            }
+            
+            for i in (minCol+1)..<(maxCol-1) {
+                if (pieceAt(col: i, row: fromRow)) != nil {
+                    return false
+                }
+            }
+            
+            return true
+            
+        } else if fromCol == toCol {
+            
+            let minRow = min(fromRow, toRow)
+            let maxRow = max(fromRow, toRow)
+            
+            // One square away:
+            if (maxRow - minRow) < 2 {
+                return true
+            }
+            
+            for i in (minRow+1)..<(maxRow-1) {
+                if (pieceAt(col: fromCol, row: i)) != nil {
+                    return false
+                }
+            }
+            
+            return true
+            
+            
+        }
+        
+        return false
+        
     }
     
     

@@ -43,4 +43,15 @@ class ChessEngineTests: XCTestCase {
         
     }
     
+    func testRookRules() {
+        var game = ChessEngine()
+        game.pieces.insert(ChessPiece(col: 0, row: 7, isWhite: true, imageName: "", rank: .rook))
+
+        
+        XCTAssertFalse(game.canMovePiece(fromCol: 0, fromRow: 7, toCol: 1, toRow: 6))
+        XCTAssertTrue(game.canMovePiece(fromCol: 0, fromRow: 7, toCol: 0, toRow: 5))
+    }
+    
+
+    
 }
