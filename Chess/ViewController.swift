@@ -79,7 +79,7 @@ class ViewController: UIViewController{
         boardView.setNeedsDisplay()
         infoLabel.text = "White's Turn"
         
-
+        
     }
 }
 
