@@ -64,8 +64,12 @@ struct ChessEngine {
             return canMoveRook(fromCol: fromCol, fromRow: fromRow, toCol: toCol, toRow: toRow)
         case .bishop:
             return canMoveBishop(fromCol: fromCol, fromRow: fromRow, toCol: toCol, toRow: toRow)
-        default:
-            return true
+        case .queen:
+            return canMoveBishop(fromCol: fromCol, fromRow: fromRow, toCol: toCol, toRow: toRow) || canMoveRook(fromCol: fromCol, fromRow: fromRow, toCol: toCol, toRow: toRow)
+        case .king:
+            return canMoveKing(fromCol: fromCol, fromRow: fromRow, toCol: toCol, toRow: toRow)
+        case .pawn:
+            return canMovePawn(fromCol: fromCol, fromRow: fromRow, toCol: toCol, toRow: toRow)
         }
 
     }
@@ -149,88 +153,16 @@ struct ChessEngine {
         }
         
     }
-    func isPathEmpty(fromCol: Int, fromRow: Int, toCol: Int, toRow:Int) -> Bool {
-        
-        // Check same row:
-        if fromRow == toRow { // HORIZONTAL
-            
-            let minCol = min(fromCol, toCol)
-            let maxCol = max(fromCol, toCol)
-            
-            // One square away:
-            if (maxCol - minCol) < 2 {
-                return true
-            }
-            
-            for i in (minCol+1)..<(maxCol-1) {
-                if (pieceAt(col: i, row: fromRow)) != nil {
-                    return false
-                }
-            }
-            
-            return true
-            
-        } else if fromCol == toCol { // VERTICAL
-            
-            let minRow = min(fromRow, toRow)
-            let maxRow = max(fromRow, toRow)
-            
-            // One square away:
-            if (maxRow - minRow) < 2 {
-                return true
-            }
-            
-            for i in (minRow+1)..<(maxRow-1) {
-                if (pieceAt(col: fromCol, row: i)) != nil {
-                    return false
-                }
-            }
-            
-            return true
-        } else if abs(fromCol - toCol) == abs(fromRow - toRow) { // vertical 
-            let minCol = min(fromCol, toCol)
-            let maxCol = max(fromCol, toCol)
-            let minRow = min(fromRow, toRow)
-            let maxRow = max(fromRow, toRow)
-            
-            // Top Left to Bottom Right
-            if (fromRow - toRow) == (fromCol - toCol) {
-                // One square away:
-                if (maxCol - minCol) < 2 {
-                    return true
-                }
-                
-                for i in 1..<abs(fromCol - toCol) {
-                    if (pieceAt(col: minCol + i, row: minRow + i)) != nil {
-                        return false
-                    }
-                }
-            } else {
-                // Bottom Left to Top Right
     
-                
-                // One square away:
-                if (maxCol - minCol) < 2 {
-                    return true
-                }
-                
-                for i in 1..<abs(fromCol - toCol) {
-                    if (pieceAt(col: minCol + i, row: maxRow - i)) != nil {
-                        return false
-                    }
-                }
-                
-            }
-            
-            
-            
-            
-           
-        }
-        
-        return false
-        
+    func canMoveKing(fromCol: Int, fromRow: Int, toCol: Int, toRow:Int) -> Bool {
+        return (abs(fromCol - toCol) == 1) || (abs(fromRow - toRow) == 1)
     }
+    
+    func canMovePawn(fromCol: Int, fromRow: Int, toCol: Int, toRow:Int) -> Bool {
+//        return canMoveKing(fromCol: fromCol, fromRow: fromRow, toCol: toCol, toRow: toRow)
+        return true
+    }
+    
     
     
     
