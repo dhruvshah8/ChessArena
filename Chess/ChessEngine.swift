@@ -53,13 +53,26 @@ struct ChessEngine {
                 return false
         }
         
-        
         if movingPiece.isWhite != whitesTurn {
             return false // wrong player's turn
         }
+        
+        switch movingPiece.rank {
+        case .knight:
+            return canMoveKnight(fromCol: fromCol, fromRow: fromRow, toCol: toCol, toRow: toRow)
+        default:
+            return true
+        }
    
-        return true
+//        return true
     }
+    
+    func canMoveKnight(fromCol: Int, fromRow: Int, toCol: Int, toRow:Int) -> Bool{
+        
+        return (abs(fromCol - toCol) == 1 && abs(fromRow - toRow) == 2) || (abs(fromRow - toRow) == 1 && abs(fromCol - toCol) == 2)
+    
+    }
+    
     
     
     // Find Piece at col and row
