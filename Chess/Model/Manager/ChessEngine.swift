@@ -8,12 +8,48 @@
 import Foundation
 
 struct ChessEngine {
-    var pieces = Set<ChessPiece>()
+    
+    var pieces = Set<ChessPiece>() // All pieces currently in the game
     var whitesTurn: Bool = true // Who's Turn Var
     
+    
+    // Add pieces to Pieces Set
+    mutating func initializeGame() {
+        whitesTurn = true // white goes first
+        pieces.removeAll()
+        
+        
+        // Minor Pieces:
+        for i in 0..<2 {
+            pieces.insert(ChessPiece(col: (i * 7), row: 0, isWhite: false, imageName: "Rook-black", rank: .rook))
+            pieces.insert(ChessPiece(col: (i * 7), row: 7, isWhite: true, imageName: "Rook-white", rank: .rook))
+            pieces.insert(ChessPiece(col: 1 + (i * 5), row: 0, isWhite: false, imageName: "Knight-black", rank: .knight))
+            pieces.insert(ChessPiece(col: 1 + (i * 5), row: 7, isWhite: true, imageName: "Knight-white", rank: .knight))
+            pieces.insert(ChessPiece(col: 2 + (i * 3), row: 0, isWhite: false, imageName: "Bishop-black", rank: .bishop))
+            pieces.insert(ChessPiece(col: 2 + (i * 3), row: 7, isWhite: true, imageName: "Bishop-white", rank: .bishop))
+        }
+        
+        // Pawns:
+        for col in 0..<8 {
+            pieces.insert(ChessPiece(col: col, row: 1, isWhite: false, imageName: "Pawn-black", rank: .pawn))
+            pieces.insert(ChessPiece(col: col, row: 6, isWhite: true, imageName: "Pawn-white", rank: .pawn))
+        }
+        
+        // King & Queen:
+        pieces.insert(ChessPiece(col: 3, row: 0, isWhite: false, imageName: "Queen-black", rank: .queen))
+        pieces.insert(ChessPiece(col: 3, row: 7, isWhite: true, imageName: "Queen-white", rank: .queen))
+        
+        pieces.insert(ChessPiece(col: 4, row: 0, isWhite: false, imageName: "King-black", rank: .king))
+        pieces.insert(ChessPiece(col: 4, row: 7, isWhite: true, imageName: "King-white", rank: .king))
+        
+        
+    }
+    
+    
+    // Chaning cordinates of pieces when moved:
     mutating func movePiece(fromCol: Int, fromRow: Int, toCol: Int, toRow:Int) {
-   
-        if !canMovePiece(fromCol: fromCol, fromRow: fromRow, toCol: toCol, toRow: toRow) {
+        
+        guard canMovePiece(fromCol: fromCol, fromRow: fromRow, toCol: toCol, toRow: toRow) else {
             return
         }
         
@@ -22,7 +58,7 @@ struct ChessEngine {
             return
         }
         
-        
+        // capturing piece
         if let target = pieceAt(col: toCol, row: toRow) {
             pieces.remove(target)
         }
@@ -35,28 +71,45 @@ struct ChessEngine {
         
     }
     
+    // Find Piece at col and row
+    func pieceAt(col: Int, row: Int) -> ChessPiece? {
+        for piece in pieces {
+            if piece.col == col && piece.row == row {
+                return piece
+            }
+        }
+        return nil // no piece found at this place
+    }
+    
+    
     func canMovePiece(fromCol: Int, fromRow: Int, toCol: Int, toRow:Int) -> Bool{
         
+        // Out of bounds:
         if toCol < 0 || toCol > 7 || toRow < 0 || toRow > 7 {
             return false
         }
         
+        // Same spot:
         if fromCol == toCol && fromRow == toRow {
             return false
         }
         
+        // get piece to move
         guard let movingPiece = pieceAt(col: fromCol, row: fromRow) else {
             return false
         }
         
+        // Same colour piece is not target
         if let target = pieceAt(col: toCol, row: toRow), target.isWhite == movingPiece.isWhite {
-                return false
+            return false
         }
         
+        // Correct player's turn
         if movingPiece.isWhite != whitesTurn {
             return false // wrong player's turn
         }
         
+        // Piece RULES:
         switch movingPiece.rank {
         case .knight:
             return canMoveKnight(fromCol: fromCol, fromRow: fromRow, toCol: toCol, toRow: toRow)
@@ -71,13 +124,16 @@ struct ChessEngine {
         case .pawn:
             return canMovePawn(fromCol: fromCol, fromRow: fromRow, toCol: toCol, toRow: toRow)
         }
-
+        
     }
     
+    
+    
+    // MARK: PIECE RULES
     func canMoveKnight(fromCol: Int, fromRow: Int, toCol: Int, toRow:Int) -> Bool{
         
         return (abs(fromCol - toCol) == 1 && abs(fromRow - toRow) == 2) || (abs(fromRow - toRow) == 1 && abs(fromCol - toCol) == 2)
-    
+        
     }
     
     func canMoveRook(fromCol: Int, fromRow: Int, toCol: Int, toRow:Int) -> Bool{
@@ -93,6 +149,7 @@ struct ChessEngine {
                 return true
             }
             
+            // Make sure no piece along path:
             for i in (minCol+1)..<(maxCol) {
                 if (pieceAt(col: i, row: fromRow)) != nil {
                     return false
@@ -110,6 +167,7 @@ struct ChessEngine {
                 return true
             }
             
+            // Make sure no piece along path:
             for i in (minRow+1)..<(maxRow) {
                 if (pieceAt(col: fromCol, row: i)) != nil {
                     return false
@@ -117,13 +175,12 @@ struct ChessEngine {
             }
             
             return true
-        
+            
         } else {
             return false
         }
-    
+        
     }
-    // col = vertical row = horizontal
     
     func canMoveBishop(fromCol: Int, fromRow: Int, toCol: Int, toRow:Int) -> Bool {
         
@@ -159,54 +216,11 @@ struct ChessEngine {
     }
     
     func canMovePawn(fromCol: Int, fromRow: Int, toCol: Int, toRow:Int) -> Bool {
-//        return canMoveKing(fromCol: fromCol, fromRow: fromRow, toCol: toCol, toRow: toRow)
+        //        return canMoveKing(fromCol: fromCol, fromRow: fromRow, toCol: toCol, toRow: toRow)
         return true
     }
     
     
-    
-    
-    // Find Piece at col and row
-    func pieceAt(col: Int, row: Int) -> ChessPiece? {
-        for piece in pieces {
-            if piece.col == col && piece.row == row {
-                return piece
-            }
-        }
-        return nil // no piece found at this place
-    }
-    
-    mutating func initializeGame() {
-        whitesTurn = true 
-        pieces.removeAll()
-        
-        // MARK: Optimized using loop:
-        
-        // Minor Pieces:
-        for i in 0..<2 {
-            pieces.insert(ChessPiece(col: (i * 7), row: 0, isWhite: false, imageName: "Rook-black", rank: .rook))
-            pieces.insert(ChessPiece(col: (i * 7), row: 7, isWhite: true, imageName: "Rook-white", rank: .rook))
-            pieces.insert(ChessPiece(col: 1 + (i * 5), row: 0, isWhite: false, imageName: "Knight-black", rank: .knight))
-            pieces.insert(ChessPiece(col: 1 + (i * 5), row: 7, isWhite: true, imageName: "Knight-white", rank: .knight))
-            pieces.insert(ChessPiece(col: 2 + (i * 3), row: 0, isWhite: false, imageName: "Bishop-black", rank: .bishop))
-            pieces.insert(ChessPiece(col: 2 + (i * 3), row: 7, isWhite: true, imageName: "Bishop-white", rank: .bishop))
-        }
-        
-        // Pawns:
-        for col in 0..<8 {
-            pieces.insert(ChessPiece(col: col, row: 1, isWhite: false, imageName: "Pawn-black", rank: .pawn))
-            pieces.insert(ChessPiece(col: col, row: 6, isWhite: true, imageName: "Pawn-white", rank: .pawn))
-        }
-        
-        // King & Queen:
-        pieces.insert(ChessPiece(col: 3, row: 0, isWhite: false, imageName: "Queen-black", rank: .queen))
-        pieces.insert(ChessPiece(col: 3, row: 7, isWhite: true, imageName: "Queen-white", rank: .queen))
-        
-        pieces.insert(ChessPiece(col: 4, row: 0, isWhite: false, imageName: "King-black", rank: .king))
-        pieces.insert(ChessPiece(col: 4, row: 7, isWhite: true, imageName: "King-white", rank: .king))
-        
-        
-    }
 }
 
 
@@ -237,14 +251,13 @@ extension ChessEngine: CustomStringConvertible {
                     desc += " ."
                 }
                 
-           
+                
             }
             desc += "\n"
         }
-     
+        
         
         return desc
     }
-    
-    
 }
+
